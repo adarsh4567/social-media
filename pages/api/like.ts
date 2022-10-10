@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { client } from '../../utils/client'
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4, v4 } from 'uuid';
 
 
 
@@ -12,7 +12,7 @@ export default async function handler(
         const {userId,postId,like} = req.body;
         const data = like ? await client.patch(postId).setIfMissing({likes:[]}).insert('after','likes[-1]',[
             {
-                _key:uuid(),
+                _key:v4(),
                 _ref: userId,
             }
         ]).commit():await client.patch(postId).unset([`likes[_ref=="${userId}"]`]).commit();

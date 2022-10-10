@@ -10,7 +10,7 @@ interface IProps{
   comment:string,
   setComment:Dispatch<SetStateAction<string>>,
   addComment:(e:React.FormEvent)=> void,
-  comments: IComment[];
+  comments: any;
 }
 interface IComment{
   comment:string;
@@ -24,7 +24,7 @@ const Comments = ({comment,isPostingComment,setComment,comments,addComment}:IPro
     <div className=' pt-4 px-10 bg-[#1b1f24] border-b-2 lg:pb-0 pb-[100px]'>
        <div className='overflow-scroll lg:h-[465px] text-white'>
            {comments?.length > 0 ? (
-            comments.map((item,idx) => (
+            comments.map((item:any,idx:any) => (
             <>
             {allUsers.map((user:IUser) => (
               user._id ===(item.postedBy._id || item.postedBy._ref) && (
